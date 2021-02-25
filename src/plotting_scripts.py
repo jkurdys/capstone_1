@@ -1,3 +1,12 @@
+'''
+This script is intended to transfer the plotting functionality of
+ga_voter_scripts to a more object oriented style by putting the plotting
+features of that file into functions.
+
+This script must be run in the same directory as the user's dataset. For more 
+information on the dataset and how to download it, consult the README.
+'''
+
 # imports
 import pandas as pd
 import numpy as np
@@ -19,6 +28,7 @@ def make_hist(df, f_name, title, xlabel, ylabel, save=True,):
     else:
         return plt.show()
        
+
 
 if __name__ == '__main__':
 
