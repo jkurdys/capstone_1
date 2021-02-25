@@ -1,3 +1,12 @@
+'''
+This script is currently configured to save plotted images in an adjacent /images
+directory and print the p-values for tests of various geographic, demographic and
+partisan subsets of the population.
+
+This script must be run in the same directory as the user's dataset. For more 
+information on the dataset and how to download it, consult the README.
+'''
+
 # imports
 import pandas as pd
 import numpy as np
@@ -11,7 +20,6 @@ import scipy.stats as stats
 oct_all = pd.read_csv('tbl_prod_GABU202010_all.csv', sep= '|')
 oct_adds = pd.read_csv('tbl_prod_GABU202010_new_records.csv', sep= '|')
 oct_drops = pd.read_csv('tbl_prod_GABU202010_dropped_records.csv', sep= '|')
-#print(oct_all.info(), oct_adds.info(), oct_drops.info())
 
 # calculate some state-level registration totals
 oct_state_tot = oct_all['registration_number'].count()
@@ -115,7 +123,7 @@ county89_cdf = 1 - county89_binomial.cdf(county89_oct_adds)
 county21_cdf = 1 - county21_binomial.cdf(county21_oct_adds)
 
 # we see nothing below a 0.05 rejection threshhold to warrant rejecting the null hypothesis
-print(county91_cdf, county127_cdf, county57_cdf, county89_cdf, county21_cdf)
+print(f"p-values for CDF of geographic binomial distribution using normalized county mean:\n County code 91: {county91_cdf}\n County code 127: {county127_cdf}\n County code 57: {county57_cdf}\n County code 89: {county89_cdf}\n County code 21: {county21_cdf}")
 
 # demographic statistical tests and plots
 # registrations by gender 
@@ -172,11 +180,11 @@ osm_cdf = 1 - osm_binomial.cdf(o_oct_adds)
 
 # we see nothing below a 0.05 rejection threshhold to warrant rejecting the null hypothesis
 # using the gender mean.
-print(fgm_cdf, mgm_cdf, ogm_cdf)
+print(f"p-values for CDF of demographic binomial distribution using normalized gender mean:\n Female: {fgm_cdf}\n Male: {mgm_cdf}\n Other: {ogm_cdf}")
 
 # we see nothing below a 0.05 rejection threshhold to warrant rejecting the null hypothesis
 # using the state mean.
-print(fsm_cdf, msm_cdf, osm_cdf)
+print(f"p-values for CDF of demographic binomial distribution using simple state mean:\n Female: {fsm_cdf}\n Male: {msm_cdf}\n Other: {osm_cdf}")
 
 # partisan statistical tests and plots
 plt.figure(figsize=(5,5))
@@ -265,8 +273,8 @@ rsm_cdf = 1 - rsm_binomial.cdf(r_oct_drops)
 
 # we see nothing below a 0.05 rejection threshhold to warrant rejecting the null hypothesis
 # using the party mean.
-print(dpm_cdf, npm_cdf, nppm_cdf, rpm_cdf)
+print(f"p-values for CDF of partisan binomial distribution using normalized party mean:\n Democrat: {dpm_cdf}\n Undeclared: {npm_cdf}\n Unaffiliated: {nppm_cdf}\n Republican: {rpm_cdf}")
 
 # we see nothing below a 0.05 rejection threshhold to warrant rejecting the null hypothesis
 # using the state mean.
-print(dsm_cdf, nsm_cdf, npsm_cdf, rsm_cdf)
+print(f"p-values for CDF of partisan binomial distribution using simple state mean:\n Democrat: {dsm_cdf}\n Undeclared: {nsm_cdf}\n Unaffiliated: {npsm_cdf}\n Republican: {rsm_cdf}")
