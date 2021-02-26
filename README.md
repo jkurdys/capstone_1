@@ -45,7 +45,7 @@ Since the geographic categorization by county offered a large number of subsets 
 
 Also, while most counties had fewer than 50,000 registered voters, a few large counties exceeded 200,000. Using the state mean could favor the mean set by these large counties, whereas taking the mean of the rates observed in each individual county would effectively compare apples to apples (county to county) irrespective of population.
 
-![](images/county_pop_hist.png)
+![](images/oct_county_tots.png)
 
 > **Similarly, most counties are relatively small.**
 
