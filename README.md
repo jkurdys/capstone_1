@@ -37,6 +37,7 @@ Analyzing the different subsets of data had more commonalities than differences.
 
 ### Means to an End
 Having selected the binomial distribution to model the observed data, the next question that arose was how to establish a mean value for the rate of added registrations for geographic and demographic subsets or the rate of dropped registrations for partisan subsets.
+
 Since the geographic categorization by county offered a large number of subsets corresponding to Georgia’s 159 counties, choosing the mean raised some issues. The majority of counties coalesced around a rate just under two percent for added registrations, however a few outlier counties had values at more than twice this rate. 
 
 ![](images/county_rates_hist.png)
@@ -66,7 +67,7 @@ Because there were so few categories to analyze, it remained practical to compar
 ### The Secret is There ain’t no Secret
 The prevailing null hypothesis guiding all of the experiments in this project holds that the means observed when subdividing the population will fall within the expected confidence interval established by the mean rate of voter registrations for the state as a whole. In each experiment I normalized the state mean with respect to the category under investigation and either substituted that normalized mean for the state mean, as in the case of the geographic subsets categorized by county, or compared the categorically normalized mean to the simple state mean in order to determine what if any differences might arise by preferring one value to another.
 
-Using a standard rejection threshold of five percent, I applied single-tailed tests on the assumption that the observed outliers, being greater than the normalized or simple means, would constitute irregularities because they exceeded the range of mean values predicted by the means for the general population. This would also have the effect of lowering the threshold for constituting an irregularity (falsely rejecting the null hypothesis), so a correction, such as Bonferroni, could be applied to recalculate the rejection threshold on an ad hoc basis in the event that a potential irregularity were detected.
+Using a standard rejection threshold of five percent, I applied single-tailed tests on the assumption that the observed outliers, being greater than the normalized or simple means, would constitute irregularities because they exceeded the range of mean values predicted by the mean for the general population. This would also have the effect of lowering the threshold for constituting an irregularity (falsely rejecting the null hypothesis), so a correction, such as Bonferroni, could be applied to recalculate the rejection threshold on an ad hoc basis in the event that a potential irregularity were detected.
 
 Ultimately, the null hypothesis won out uniformly in all contests. More accurately, none of the experiments, which involved subtracting from one the CDF of the value of added or dropped registrations for the category based on the binomial distribution constructed from the chosen mean, yielded anything approaching a significant result.
 
@@ -75,6 +76,14 @@ Ultimately, the null hypothesis won out uniformly in all contests. More accurate
 >``binomial = stats.binom(n=sample_population, p=chosen_mean)``
 >
 >``p-value = 1 - binomial.cdf(number_of_adds/drops_for_category)``
+>
+
+
+![](images/output.png)
+
+
 
 ## **Conclusions and Directions for Future Research**
-While one could conclude that the project’s failure to reject the null hypothesis underlines the validity of Georgia voter registration records, I remain skeptical that either the statistical approach or the sophistication of the code base are sufficient to warrant such a conclusion. To be clear, I am not alleging that there were likely irregularities where none were observed, but rather suggesting that the statistical approach and the coding technology employed limited the project to low level detail where irregularities would be sure to attract scrutiny from outside the discipline of data science. Accordingly, a more granular approach that combines various geographic and demographic categories, such as the potential for differences not only among individual counties, but collections of counties, such as urban versus rural counties, highly segregated versus integrated counties, could identify or fail to identify irregularities found outside the limited scopes of residency, gender and party affiliation. These more granular approaches would require not only more sophisticated statistical analyses, but also a more robust code base capable of isolating and feeding data into those increasingly sophisticated statistical models.
+While one could conclude that the project’s failure to reject the null hypothesis underlines the validity of Georgia voter registration records, I remain skeptical that either the statistical approach or the sophistication of the code base are sufficient to warrant such a conclusion. To be clear, I am not alleging that there were likely irregularities where none were observed, but rather suggesting that the statistical approach and the coding technology employed limited the project to low level detail where irregularities would be sure to attract scrutiny from outside the discipline of data science.
+
+Accordingly, a more granular approach that combines various geographic and demographic categories, such as the potential for differences not only among individual counties, but collections of counties, such as urban versus rural counties, highly segregated versus integrated counties, could identify or fail to identify irregularities found outside the limited scopes of county residency, gender and party affiliation. These more granular approaches would require not only more sophisticated statistical analyses, but also a more robust code base capable of isolating and feeding data into those increasingly sophisticated statistical models.
